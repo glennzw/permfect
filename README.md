@@ -71,7 +71,7 @@ $ go run permfect.go -infile input.txt -outbase speedTest
 $ time python permute.py input.txt speedTest
 python permute.py input.txt speedTest  769.67s user 14.38s system 252% cpu 5:10.79 total
 ```
-*Result for permfect.go: 12m48s minutes.*
+*Result for permute.py: 12m48s minutes.*
 
 *Python version 1.4x faster.*
 
@@ -105,8 +105,7 @@ $ go run comparePerms.go
 
  ## Alternative Algorithms
 
- There are many ways to calculate permutations, and various algoritms exist such as [quickperm](http://www.quickperm.org/), [Knuth's shuffle](https://en.wikipedia.org/wiki/Random_permutation#Knuth_shuffles), and [Heap's algorithm](https://en.wikipedia.org/wiki/Heap%27s_algorithm). However by definition a permutation is the length of the input string. e.g the permutations of `{1, 2, 3}` are:
- `{123, 132, 213, 231, 312, 321}`. 
+ There are many ways to calculate permutations, and various algoritms exist such as [quickperm](http://www.quickperm.org/), [Knuth's shuffle](https://en.wikipedia.org/wiki/Random_permutation#Knuth_shuffles), and [Heap's algorithm](https://en.wikipedia.org/wiki/Heap%27s_algorithm). 
  
  A quick performance test of an alternative permuation algorithm in Go reveals that the itertools one may indeed be slow, but still lagging behind the very quick Python version:
  ```
@@ -122,7 +121,8 @@ $ go run comparePerms.go
  ```
 
 
- In order to calculate varying permutation lengths (as in the Python implementation) we need to enumerate all subsets of size k (for k = 2, ...,n, where n is the size of the array). i.e calculate all the combinations subsets of the input and for each enumerated subset enumerate the permutation for it.
+ However by definition a permutation is the length of the input string. e.g the permutations of `{1, 2, 3}` are:
+ `{123, 132, 213, 231, 312, 321}`. In order to calculate varying permutation lengths (as in the Python implementation) we need to enumerate all subsets of size k (for k = 2, ...,n, where n is the size of the array). i.e calculate all the combinations subsets of the input and for each enumerated subset enumerate the permutation for it.
 
 There are similarly many different algorithms for calculating combinatons. Non-recursive algorithms seem to perform better with Go.
 
